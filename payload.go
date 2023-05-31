@@ -13,6 +13,8 @@ type PayLoad struct {
 		Message      interface{} `json:"message,omitempty"`
 		Options      *Option     `json:"options,omitempty"`
 	} `json:"body"`
+	RequestId  string      `json:"request_id,omitempty"`
+	CustomArgs interface{} `json:"custom_args,omitempty"`
 }
 
 func NewPushPayLoad() *PayLoad {
@@ -25,6 +27,10 @@ func NewPushPayLoad() *PayLoad {
 	}
 	pl.Body.Options = o
 	return pl
+}
+
+func (this *PayLoad) SetRequestId(reqId string) {
+	this.RequestId = reqId
 }
 
 func (this *PayLoad) SetPlatform(pf *Platform) {

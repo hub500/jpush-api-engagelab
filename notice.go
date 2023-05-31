@@ -11,6 +11,7 @@ type AndroidNotice struct {
 	Alert     string                 `json:"alert"`
 	Title     string                 `json:"title,omitempty"`
 	BuilderId int                    `json:"builder_id,omitempty"`
+	ChannelId string                 `json:"channel_id,omitempty"`
 	Extras    map[string]interface{} `json:"extras,omitempty"`
 }
 
@@ -45,4 +46,22 @@ func (this *Notice) SetIOSNotice(n *IOSNotice) {
 
 func (this *Notice) SetWinPhoneNotice(n *WinPhoneNotice) {
 	this.WINPhone = n
+}
+
+func NewAndroidNotice(alert, title string) *AndroidNotice {
+	notice := AndroidNotice{
+		Alert:     alert,
+		Title:     title,
+		BuilderId: 1,
+	}
+	return &notice
+}
+
+func NewIOSNotice(alert string) *IOSNotice {
+	notice := IOSNotice{
+		Alert: alert,
+		Sound: "default",
+		Badge: "+1",
+	}
+	return &notice
 }

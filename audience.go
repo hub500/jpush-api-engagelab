@@ -16,8 +16,15 @@ func (this *Audience) All() {
 	this.Object = "all"
 }
 
+// 设备标识 一次推送最多 1000 个
 func (this *Audience) SetID(ids []string) {
-	this.set(ID, ids)
+	_ids := []string{}
+	if len(ids) > 1000 {
+		_ids = append(_ids, ids[:1000]...)
+	} else {
+		_ids = ids
+	}
+	this.set(ID, _ids)
 }
 
 func (this *Audience) SetTag(tags []string) {

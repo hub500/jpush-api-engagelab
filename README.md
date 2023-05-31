@@ -133,3 +133,67 @@ https://www.engagelab.com/zh_CN
 
 https://jiguang-docs.yuque.com/staff-mg3p4r/vc4ysl/dl7ez50kztn6kc6l
 
+
+```
+package main
+
+import (
+	"fmt"
+
+	jpushclient "github.com/hub500/jpush-api-engagelab"
+)
+
+const (
+	appKey = "your key"
+	secret = "your secret"
+)
+
+func main() {
+	// Platform
+	var pf jpushclient.Platform
+	// pf.Add(jpushclient.ANDROID)
+	// pf.Add(jpushclient.IOS)
+	pf.All()
+
+	// Audience
+	var ad jpushclient.Audience
+	// s := []string{"1", "2", "3"}
+	// ad.SetTag(s)
+	// ad.SetAlias(s)
+	// ad.SetID([]string{"120c83f76036354eee9"})
+	ad.All()
+
+	// Notice
+	var notice jpushclient.Notice
+	notice.SetAlert("Hi, Push!")
+	notice.SetAndroidNotice(jpushclient.NewAndroidNotice("Hi, Push!", "Send to Android"))
+	notice.SetIOSNotice(jpushclient.NewIOSNotice("IOSNotice"))
+
+	var msg jpushclient.Message
+	msg.Title = "push msg title"
+	msg.Content = "push msg content"
+
+	payload := jpushclient.NewPushPayLoad()
+	payload.SetRequestId("abc123")
+	payload.SetPlatform(&pf)
+	payload.SetAudience(&ad)
+	// Disable push notification  and  messages at the same time
+	// payload.SetMessage(&msg)
+	payload.SetNotice(&notice)
+
+	bytes, _ := payload.ToBytes()
+	fmt.Printf("%s\r\n", string(bytes))
+
+	// push
+	c := jpushclient.NewPushClient(secret, appKey)
+	fmt.Println(c)
+	fmt.Println()
+
+	str, err := c.Send(bytes)
+	if err != nil {
+		fmt.Printf("err:%s", err.Error())
+	} else {
+		fmt.Printf("ok:%s", str)
+	}
+}
+```
