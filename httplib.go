@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-//  Get returns *HttpRequest with GET method.
+// Get returns *HttpRequest with GET method.
 func Get(url string) *HttpRequest {
 	var req http.Request
 	req.Method = "GET"
@@ -107,9 +107,9 @@ func (b *HttpRequest) SetTransport(transport http.RoundTripper) *HttpRequest {
 // example:
 //
 //	func(req *http.Request) (*url.URL, error) {
-// 		u, _ := url.ParseRequestURI("http://127.0.0.1:8118")
-// 		return u, nil
-// 	}
+//		u, _ := url.ParseRequestURI("http://127.0.0.1:8118")
+//		return u, nil
+//	}
 func (b *HttpRequest) SetProxy(proxy func(*http.Request) (*url.URL, error)) *HttpRequest {
 	b.proxy = proxy
 	return b

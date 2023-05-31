@@ -10,7 +10,7 @@ import (
 
 const (
 	SUCCESS_FLAG  = "msg_id"
-	HOST_NAME_SSL = "https://api.jpush.cn/v3/push"
+	HOST_NAME_SSL = "https://push.api.engagelab.cc/v4/push"
 	HOST_SCHEDULE = "https://api.jpush.cn/v3/schedules"
 	HOST_REPORT   = "https://report.jpush.cn/v3/received"
 	BASE64_TABLE  = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
